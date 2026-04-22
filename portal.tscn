@@ -6,7 +6,7 @@
 size = Vector3(1.1875, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0r486"]
-viewport_path = NodePath("CollisionShape3D/SubViewport2")
+viewport_path = NodePath("SubViewportContainer/SubViewport2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ef3v5"]
 resource_local_to_scene = true
@@ -14,18 +14,31 @@ render_priority = 0
 shader = ExtResource("1_0r486")
 shader_parameter/texture_albedo = SubResource("ViewportTexture_0r486")
 
-[node name="Node3D" type="Area3D"]
+[node name="Node3D" type="Node3D"]
+top_level = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09375, 0, 0)
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325603, 0, 0)
 shape = SubResource("BoxShape3D_0r486")
 
-[node name="SubViewport2" type="SubViewport" parent="CollisionShape3D"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/SubViewport2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500153, 0.0561625)
-size = Vector3(1, 2.00031, 0.148926)
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3113e-05, 0.503011, 0.0558065)
+size = Vector3(1, 2, 0.1)
 material = SubResource("ShaderMaterial_ef3v5")
 
-[node name="Camera3D" type="Camera3D" parent="CollisionShape3D/SubViewport2"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport2" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(512, 1024)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507745, -0.0845532)
+rotation_order = 0
+keep_aspect = 0
 current = true
