@@ -15,6 +15,7 @@ shader = ExtResource("1_0r486")
 shader_parameter/texture_albedo = SubResource("ViewportTexture_0r486")
 
 [node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0458835)
 top_level = true
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -25,7 +26,7 @@ shape = SubResource("BoxShape3D_0r486")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3113e-05, 0.503011, 0.0558065)
-size = Vector3(1, 2, 0.1)
+size = Vector3(2, 4, 0.1)
 material = SubResource("ShaderMaterial_ef3v5")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -38,7 +39,9 @@ size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507745, -0.0845532)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.13685e-09, 0, 0.0471912)
 rotation_order = 0
-keep_aspect = 0
 current = true
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../SubViewportContainer/SubViewport2/Camera3D")
