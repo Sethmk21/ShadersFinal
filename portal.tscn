@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://vx1u2koi4clh"]
+[gd_scene load_steps=6 format=3 uid="uid://vx1u2koi4clh"]
 
 [ext_resource type="Shader" uid="uid://clw0wntauus5j" path="res://portal.gdshader" id="1_0r486"]
+[ext_resource type="Script" uid="uid://4jolbcmihonv" path="res://portal.gd" id="1_ef3v5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0r486"]
 size = Vector3(1.1875, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0r486"]
-viewport_path = NodePath("SubViewportContainer/SubViewport2")
+viewport_path = NodePath("SubViewport2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ef3v5"]
 resource_local_to_scene = true
@@ -14,9 +15,10 @@ render_priority = 0
 shader = ExtResource("1_0r486")
 shader_parameter/texture_albedo = SubResource("ViewportTexture_0r486")
 
-[node name="Node3D" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0458835)
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("cameraToMove")]
 top_level = true
+script = ExtResource("1_ef3v5")
+cameraToMove = NodePath("SubViewport2/Camera3D")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -29,19 +31,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3113e-05, 0.503011, 0.0558
 size = Vector3(2, 4, 0.1)
 material = SubResource("ShaderMaterial_ef3v5")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SubViewport2" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport2" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.13685e-09, 0, 0.0471912)
+[node name="Camera3D" type="Camera3D" parent="SubViewport2"]
 rotation_order = 0
 current = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
-remote_path = NodePath("../SubViewportContainer/SubViewport2/Camera3D")
+remote_path = NodePath("../SubViewport2/Camera3D")

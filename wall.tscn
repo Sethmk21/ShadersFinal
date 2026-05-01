@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg8sbefq8lhje"]
+
+[ext_resource type="Texture2D" uid="uid://2r4g4yfo22n" path="res://portals/1xSubstance_graph_base_color.png" id="1_y4f30"]
+[ext_resource type="Texture2D" uid="uid://dwtokj47fetj4" path="res://portals/1xSubstance_graph_normal.png" id="2_iuee5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xduj2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbgl8"]
+albedo_texture = ExtResource("1_y4f30")
+normal_enabled = true
+normal_texture = ExtResource("2_iuee5")
+uv1_scale = Vector3(3, 2, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dy4dl"]
+
+[node name="WALL" type="MeshInstance3D"]
+transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 0)
+mesh = SubResource("BoxMesh_xduj2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbgl8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_dy4dl")
