@@ -17,3 +17,4 @@ mesh = SubResource("CapsuleMesh_4flbx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516857, 0)
+far = 50.0
