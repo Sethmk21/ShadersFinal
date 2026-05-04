@@ -97,21 +97,23 @@ light_color = Color(1, 1, 0.941176, 1)
 light_energy = 3.747
 shadow_enabled = true
 
-[node name="portal1" type="Node3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53971, 1.48749, 1.75189)
+[node name="portal1" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport", "PortalVisual")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53971, 1.48749, 1.69681)
 top_level = true
 script = ExtResource("2_wkp8b")
 otherPortal = NodePath("../portal2")
-cameraToMove = NodePath("SubViewport2/Camera3D")
+cameraToMove = NodePath("../portal2/SubViewport2/Camera3D")
+viewport = NodePath("SubViewport2")
+PortalVisual = NodePath("CSGBox3D")
+isRot = true
 
-[node name="Area3D" type="Area3D" parent="portal1"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="portal1/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="portal1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325603, 0, 0)
 shape = SubResource("BoxShape3D_0r486")
+disabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="portal1"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.3113e-05, 0.503011, 0.0558065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3113e-05, 0.503011, 0.0558065)
 size = Vector3(2, 4, 0.1)
 material = SubResource("ShaderMaterial_c6i3y")
 
@@ -121,7 +123,7 @@ size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="portal1/SubViewport2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53971, 1.48749, 1.75189)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53971, 1.48749, 1.69681)
 rotation_order = 0
 current = true
 near = 1.0
@@ -129,18 +131,19 @@ near = 1.0
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="portal1"]
 remote_path = NodePath("../SubViewport2/Camera3D")
 
-[node name="portal2" type="Node3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34995, 1.48749, -10.2082)
+[node name="portal2" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport", "PortalVisual")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34995, 1.48749, -10.3058)
 top_level = true
 script = ExtResource("2_wkp8b")
 otherPortal = NodePath("../portal1")
-cameraToMove = NodePath("SubViewport2/Camera3D")
+cameraToMove = NodePath("../portal1/SubViewport2/Camera3D")
+viewport = NodePath("SubViewport2")
+PortalVisual = NodePath("CSGBox3D")
 
-[node name="Area3D" type="Area3D" parent="portal2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="portal2/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="portal2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325603, 0, 0)
 shape = SubResource("BoxShape3D_0r486")
+disabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="portal2"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.3113e-05, 0.503011, 0.0558065)
@@ -153,7 +156,7 @@ size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="portal2/SubViewport2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34995, 1.48749, -10.2082)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34995, 1.48749, -10.3058)
 rotation_order = 0
 current = true
 near = 1.0
@@ -348,7 +351,7 @@ transform = Transform3D(-4.37114e-07, 0, 4, 0, 8, 0, -10, 0, -1.74846e-07, 10.34
 transform = Transform3D(15, 0, 0, 0, 0.166, 0, 0, 0, 15, 4.83192, -0.153092, -5.75363)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.20391, 1.29981, -3.15831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13586, 1.29981, -3.15831)
 mesh = SubResource("SphereMesh_03owx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
