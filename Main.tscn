@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dgldu605cig1v"]
+[gd_scene load_steps=28 format=3 uid="uid://dgldu605cig1v"]
 
 [ext_resource type="PackedScene" uid="uid://6ooj7aluohss" path="res://player.tscn" id="1_lgr22"]
 [ext_resource type="Texture2D" uid="uid://2r4g4yfo22n" path="res://portals/1xSubstance_graph_base_color.png" id="2_3dxm6"]
@@ -10,27 +10,50 @@
 [ext_resource type="Texture2D" uid="uid://cq7p0shxhak41" path="res://portals/floor_normal.png" id="6_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://bg8sbefq8lhje" path="res://wall.tscn" id="8_trn2v"]
 [ext_resource type="PackedScene" uid="uid://yug6fiu1wmee" path="res://floor.tscn" id="9_03owx"]
+[ext_resource type="PackedScene" uid="uid://b0meeiuuxwm5x" path="res://cube.tscn" id="11_20pc6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0r486"]
 size = Vector3(1.1875, 1, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5vvyt"]
+[sub_resource type="QuadMesh" id="QuadMesh_wkp8b"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_20pc6"]
 viewport_path = NodePath("portal2/SubViewport2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vvyt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_20pc6")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_20pc6")
+shader_parameter/ring_color = Vector4(0, 0.5, 1, 1)
+shader_parameter/ring_width = 0.08
+shader_parameter/glow_width = 0.15
+shader_parameter/glow_intensity = 1.5
+shader_parameter/ellipse_x = 0.75
+shader_parameter/ellipse_y = 0.9
+shader_parameter/noise_strength = 0.07
+shader_parameter/noise_speed = 1.2
+shader_parameter/noise_scale = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_20pc6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5vvyt"]
+viewport_path = NodePath("portal1/SubViewport2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c6i3y"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_20pc6")
 shader_parameter/texture_albedo = SubResource("ViewportTexture_5vvyt")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_wkp8b"]
-viewport_path = NodePath("portal1/SubViewport2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4qnp"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_20pc6")
-shader_parameter/texture_albedo = SubResource("ViewportTexture_wkp8b")
+shader_parameter/ring_color = Vector4(0, 0.5, 1, 1)
+shader_parameter/ring_width = 0.08
+shader_parameter/glow_width = 0.15
+shader_parameter/glow_intensity = 1.5
+shader_parameter/ellipse_x = 0.75
+shader_parameter/ellipse_y = 0.9
+shader_parameter/noise_strength = 0.07
+shader_parameter/noise_speed = 1.2
+shader_parameter/noise_scale = 6.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_20pc6"]
 
@@ -62,8 +85,6 @@ ao_enabled = true
 ao_texture = ExtResource("5_03owx")
 uv1_scale = Vector3(0.2, 0.2, 0.2)
 uv1_triplanar = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_03owx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3dxm6"]
 sky_energy_multiplier = 0.0
@@ -98,14 +119,13 @@ light_color = Color(1, 1, 0.941176, 1)
 light_energy = 3.747
 shadow_enabled = true
 
-[node name="portal1" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport", "PortalVisual")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.487, 1.697)
+[node name="portal1" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83429, 1.60889, 1.66388)
 top_level = true
 script = ExtResource("2_wkp8b")
 otherPortal = NodePath("../portal2")
 cameraToMove = NodePath("../portal2/SubViewport2/Camera3D")
 viewport = NodePath("SubViewport2")
-PortalVisual = NodePath("CSGBox3D")
 isRot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="portal1"]
@@ -113,10 +133,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325603, 0, 0)
 shape = SubResource("BoxShape3D_0r486")
 disabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="portal1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3113e-05, 0.503011, 0.0558065)
-size = Vector3(2, 4, 0.1)
-material = SubResource("ShaderMaterial_c6i3y")
+[node name="CSGBox3D" type="MeshInstance3D" parent="portal1"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 1, 0.00198364, 0.488004, 0.0524303)
+mesh = SubResource("QuadMesh_wkp8b")
+surface_material_override/0 = SubResource("ShaderMaterial_5vvyt")
 
 [node name="SubViewport2" type="SubViewport" parent="portal1"]
 handle_input_locally = false
@@ -124,7 +144,7 @@ size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="portal1/SubViewport2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.487, 1.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83429, 1.60889, 1.66388)
 rotation_order = 0
 cull_mask = 1048574
 current = true
@@ -134,25 +154,24 @@ far = 50.0
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="portal1"]
 remote_path = NodePath("../SubViewport2/Camera3D")
 
-[node name="portal2" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport", "PortalVisual")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.487, -10.306)
+[node name="portal2" type="Area3D" parent="." node_paths=PackedStringArray("otherPortal", "cameraToMove", "viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2528, 1.487, -10.306)
 top_level = true
 script = ExtResource("2_wkp8b")
 otherPortal = NodePath("../portal1")
 cameraToMove = NodePath("../portal1/SubViewport2/Camera3D")
 viewport = NodePath("SubViewport2")
-PortalVisual = NodePath("CSGBox3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="portal2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325603, 0, 0)
 shape = SubResource("BoxShape3D_0r486")
 disabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="portal2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.3113e-05, 0.503011, 0.0558065)
+[node name="CSGBox3D" type="MeshInstance3D" parent="portal2"]
+transform = Transform3D(-2, 0, -1.50996e-07, 0, 4, 0, 3.01992e-07, 0, -1, -1.3113e-05, 0.503011, 0.0558065)
 layers = 2
-size = Vector3(2, 4, 0.1)
-material = SubResource("ShaderMaterial_j4qnp")
+mesh = SubResource("QuadMesh_20pc6")
+surface_material_override/0 = SubResource("ShaderMaterial_c6i3y")
 
 [node name="SubViewport2" type="SubViewport" parent="portal2"]
 handle_input_locally = false
@@ -160,7 +179,7 @@ size = Vector2i(512, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="portal2/SubViewport2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.487, -10.306)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2528, 1.487, -10.306)
 rotation_order = 0
 cull_mask = 1048573
 current = true
@@ -318,7 +337,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lgr22")
 
 [node name="MeshInstance3D20" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(-4.37114e-07, 0, 4, 0, 8, 0, -10, 0, -1.74846e-07, 17.8, 3.93395, -11.2649)
-layers = 5
+layers = 6
 mesh = SubResource("BoxMesh_uu6xs")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3dxm6")
@@ -331,7 +350,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3dxm6")
 
 [node name="WALL" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 5.83744, 3.93987, -12.2804)
-layers = 6
+layers = 2
 
 [node name="WALL2" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 15.8241, 3.92725, -12.3073)
@@ -345,10 +364,11 @@ transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 13.828, 3.91914, 3.76614)
 
 [node name="WALL5" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 20.8839, 3.934, -8.25154)
+layers = 6
 
 [node name="WALL6" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 20.8188, 3.93459, 1.73118)
-layers = 5
+layers = 6
 
 [node name="WALL7" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(8.47734, 0, 2.12169, 0, 8, 0, -5.30422, 0, 3.39094, -1.20567, 3.93395, -10.4342)
@@ -362,6 +382,7 @@ transform = Transform3D(10, 0, 0, 0, 8, 0, 0, 0, 4, 17.2742, -4.09, 1.73118)
 
 [node name="WALL10" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(-4.37114e-07, 0, 4, 0, 8, 0, -10, 0, -1.74846e-07, -3.11964, 3.93395, -3.21196)
+layers = 5
 
 [node name="WALL11" parent="Node" instance=ExtResource("8_trn2v")]
 transform = Transform3D(-4.37114e-07, 0, 4, 0, 8, 0, -10, 0, -1.74846e-07, 21.962, -4.09, -1.23)
@@ -377,10 +398,6 @@ transform = Transform3D(-4.37114e-07, 0, 4, 0, 8, 0, -10, 0, -1.74846e-07, 10.34
 transform = Transform3D(15, 0, 0, 0, 0.166, 0, 0, 0, 15, 4.83192, -0.153092, -5.75363)
 layers = 5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13586, 1.29981, -3.15831)
-mesh = SubResource("SphereMesh_03owx")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6i3y")
 
@@ -389,3 +406,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14107, 1.12505, -2.54131)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.71, 1.44, -9.03)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("11_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55422, 1.7511, -1.2817)
