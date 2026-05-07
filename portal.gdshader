@@ -8,9 +8,9 @@ uniform float glow_width = 0.15;
 uniform float glow_intensity = 1.5;
 uniform float ellipse_x = 0.75;
 uniform float ellipse_y = 0.9;
-uniform float noise_strength = 0.05;
-uniform float noise_speed = 3;
-uniform float noise_scale = 15;
+uniform float noise_strength = 0.09;
+uniform float noise_speed = 5;
+uniform float noise_scale = 1;
 
 // Hash function for noise
 float hash(vec2 p) {
@@ -66,7 +66,7 @@ void fragment() {
         // Inside: render viewport
         vec4 albedo_tex = texture(texture_albedo, SCREEN_UV);
         ALBEDO = albedo_tex.rgb;
-    } 
+    }
 	else {
         // Ring + glow zone
         // Hard ring opacity (full color)
@@ -77,7 +77,7 @@ void fragment() {
         glow_opacity = 1.0 - glow_opacity;
         glow_opacity *= smoothstep(inner_edge, 1.0, dist);
 
-      
+
         vec3 color = ring_color.rgb;
         float alpha = max(ring_opacity, glow_opacity * glow_intensity * 0.4);
 
