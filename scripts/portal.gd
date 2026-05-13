@@ -19,15 +19,15 @@ func update_camera_to_other_portal():
 	if not curentCamera:
 		return
 		
-	print("Original camera: " ,self)
-	print(curentCamera.global_transform)
+	#print("Original camera: " ,self)
+	#print(curentCamera.global_transform)
 	
 	var CC_rel_transform_to_portal = self.global_transform.affine_inverse() * curentCamera.global_transform
-	print("Camera space to portal space: " ,self)
-	print(CC_rel_transform_to_portal)
+	#print("Camera space to portal space: " ,self)
+	#print(CC_rel_transform_to_portal)
 	var moved_to_other_portal = otherPortal.global_transform * CC_rel_transform_to_portal
-	print("Portal cam to world space: " ,self)
-	print(moved_to_other_portal)
+	#print("Portal cam to world space: " ,self)
+	#print(moved_to_other_portal)
 	cameraToMove.global_transform = moved_to_other_portal
 
 	#cameraToMove.rotation.y = tan(cameraToMove.rotation.y)

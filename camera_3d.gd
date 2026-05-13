@@ -15,7 +15,7 @@ extends Camera3D
 # ── Inspector settings ──────────────────────────────────────────────────────
 
 @export var waypoints: Array[Node3D] = []## Ordered list of Empty nodes to visit
-
+@export var dots: Node3D
 @export_group("Movement")
 @export var travel_time: float = 2.0## Seconds to move between each waypoint
 @export var ease_type: Tween.EaseType = Tween.EASE_IN_OUT
@@ -97,7 +97,8 @@ func is_playing() -> bool:
 
 func _travel_to_next() -> void:
 	var next_index: int = _current_index + 1
-
+	if next_index == 3:
+		dots.rotation.x = deg_to_rad(-82.3)
 	# Handle end of sequence
 	if next_index >= waypoints.size():
 		if loop:
