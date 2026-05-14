@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://cinbd25cx6xmn"]
+
+[ext_resource type="Texture2D" uid="uid://biwoqj8cu2g8e" path="res://portals/texture stuff/FallenPanel_base_color.png" id="1_b855y"]
+[ext_resource type="Texture2D" uid="uid://due36jrpu1oh8" path="res://portals/texture stuff/FallenPanel_base_metalness.png" id="2_3vk8s"]
+[ext_resource type="Texture2D" uid="uid://bkh7c2flosd1b" path="res://portals/texture stuff/FallenPanel_normal.png" id="3_elfna"]
+[ext_resource type="Texture2D" uid="uid://bcma14rnwy4jq" path="res://portals/texture stuff/FallenPanel_specular_roughness.png" id="4_1poft"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b855y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b855y"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vbqjv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wupoq"]
+albedo_texture = ExtResource("1_b855y")
+metallic = 1.0
+metallic_texture = ExtResource("2_3vk8s")
+roughness_texture = ExtResource("4_1poft")
+normal_enabled = true
+normal_texture = ExtResource("3_elfna")
+
+[node name="RigidBody3D" type="RigidBody3D"]
+process_priority = 1
+process_physics_priority = 1
+disable_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_b855y")
+can_sleep = false
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_b855y")
+
+[node name="fallen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+layers = 4
+mesh = SubResource("BoxMesh_vbqjv")
+surface_material_override/0 = SubResource("StandardMaterial3D_wupoq")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://dgldu605cig1v"]
+[gd_scene load_steps=45 format=3 uid="uid://dgldu605cig1v"]
 
 [ext_resource type="Texture2D" uid="uid://2r4g4yfo22n" path="res://portals/texture stuff/1xSubstance_graph_base_color.png" id="2_3dxm6"]
 [ext_resource type="Script" uid="uid://4jolbcmihonv" path="res://scripts/portal.gd" id="2_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://cinbd25cx6xmn" path="res://fallen.tscn" id="3_2gh4u"]
 [ext_resource type="Shader" uid="uid://clw0wntauus5j" path="res://portal.gdshader" id="3_20pc6"]
 [ext_resource type="Texture2D" uid="uid://dwtokj47fetj4" path="res://portals/texture stuff/1xSubstance_graph_normal.png" id="3_lgr22"]
 [ext_resource type="Texture2D" uid="uid://bah4gmgfo21t3" path="res://portals/texture stuff/floor_base_color.png" id="4_trn2v"]
@@ -19,6 +20,7 @@
 [ext_resource type="LightmapGIData" uid="uid://bpui031phujks" path="res://Main.lmbake" id="17_sc1dx"]
 [ext_resource type="PackedScene" uid="uid://djo7hojqwqimo" path="res://portal_2_old_aperture_button.glb" id="18_5tuhn"]
 [ext_resource type="PackedScene" uid="uid://dqj115r1xuwjd" path="res://scenes/dots.tscn" id="19_2gh4u"]
+[ext_resource type="PackedScene" uid="uid://dm3g754kk70xi" path="res://scenes/node_3d.tscn" id="21_devvj"]
 
 [sub_resource type="Gradient" id="Gradient_fpfj3"]
 
@@ -46,7 +48,7 @@ ambient_light_energy = 4.37
 glow_enabled = true
 glow_intensity = 0.38
 glow_strength = 0.73
-glow_blend_mode = 1
+glow_blend_mode = 0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0269
 volumetric_fog_sky_affect = 0.0
@@ -64,15 +66,15 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_20pc6")
 shader_parameter/texture_albedo = SubResource("ViewportTexture_20pc6")
-shader_parameter/ring_color = Vector4(0, 0.5, 1, 1)
+shader_parameter/ring_color = Vector4(0, 0.4, 1, 1)
 shader_parameter/ring_width = 0.08
 shader_parameter/glow_width = 0.15
 shader_parameter/glow_intensity = 1.5
 shader_parameter/ellipse_x = 0.75
 shader_parameter/ellipse_y = 0.9
-shader_parameter/noise_strength = 0.07
+shader_parameter/noise_strength = 0.04
 shader_parameter/noise_speed = 1.2
-shader_parameter/noise_scale = 6.0
+shader_parameter/noise_scale = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_20pc6"]
 
@@ -288,7 +290,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_devvj")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="Node3D/Node"]
-transform = Transform3D(8.47734, 0, 2.12169, 0, 8, 0, -5.30422, 0, 3.39094, -1.206, 11.896, -10.434)
+transform = Transform3D(8.47734, 0, 2.12169, 0, 8, 0, -5.30422, 0, 3.39094, -1.206, 11.9896, -10.434)
 layers = 5
 mesh = SubResource("BoxMesh_uu6xs")
 skeleton = NodePath("../..")
@@ -644,10 +646,10 @@ transform = Transform3D(-3.92261e-08, 0.44124, -0.897389, 1.92872e-08, 0.897389,
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("waypoints", "dots")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21935, 1.73118, 0)
 script = ExtResource("17_kjvhd")
-waypoints = [NodePath("../Node3D2"), NodePath("../Node3D3"), NodePath("../Node3D5"), NodePath("../Node3D6"), NodePath("../Node3D7")]
+waypoints = [NodePath("."), NodePath("../Node3D2"), NodePath("../Node3D3"), NodePath("../Node3D5"), NodePath("../Node3D6"), NodePath("../Node3D7")]
 dots = NodePath("../dots")
-travel_time = 2.5
-rotation_time = 2.5
+travel_time = 3.0
+rotation_time = 3.0
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("18_5tuhn")]
 transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 7.32951, -0.0724899, -3.23881)
@@ -663,3 +665,22 @@ layers = 4
 [node name="dots3" parent="." instance=ExtResource("19_2gh4u")]
 transform = Transform3D(-2.84124e-07, -1, 0, 6.5, -4.37114e-08, 0, 0, 0, 1, 7.30918, 9.66946, -10.7759)
 layers = 4
+
+[node name="RigidBody3D" parent="." instance=ExtResource("3_2gh4u")]
+transform = Transform3D(0.936207, 0, -0.35145, 0, 1, 0, 0.35145, 0, 0.936207, -0.0365263, 7.24904, -6.64576)
+
+[node name="RigidBody3D2" parent="." instance=ExtResource("3_2gh4u")]
+transform = Transform3D(0.522544, 0.516175, 0.67861, -0.31492, 0.856483, -0.408976, -0.792322, 0, 0.610104, 1.14126, 9.526, -7.78052)
+
+[node name="RigidBody3D3" parent="." instance=ExtResource("3_2gh4u")]
+transform = Transform3D(0.835443, 0, 0.549577, 0.276042, 0.864705, -0.419627, -0.475222, 0.502281, 0.722411, 0.0699134, 8.47207, -8.04793)
+
+[node name="RigidBody3D4" parent="." instance=ExtResource("3_2gh4u")]
+transform = Transform3D(0.590435, -0.251867, 0.766779, 0.153665, 0.967762, 0.199559, -0.792322, 2.81458e-08, 0.610104, 0.825482, 12.3374, -7.78052)
+
+[node name="Node3D4" parent="." instance=ExtResource("21_devvj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.514958, 8.40344, -8.0964)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.517422, -1.06915, -8.03965)
+size = Vector3(4, 2, 4.49524)

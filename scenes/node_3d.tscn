@@ -1,11 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm3g754kk70xi"]
+[gd_scene load_steps=7 format=3 uid="uid://dm3g754kk70xi"]
+
+[ext_resource type="Texture2D" uid="uid://c4thix2tnncct" path="res://sparkler-spark-isolated-on-transparent-background-png.png" id="1_tyffc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
+transparency = 1
+vertex_color_use_as_albedo = true
 albedo_color = Color(0.960784, 0.972549, 0.964706, 1)
+albedo_texture = ExtResource("1_tyffc")
 emission_enabled = true
 emission = Color(0.857272, 0.791742, 0.394756, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="Curve" id="Curve_tyffc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.581353, 0.885811), -0.823668, -0.823668, 0, 0, Vector2(0.983547, 0.0118244), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ns6u7"]
+curve = SubResource("Curve_tyffc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a202f"]
+resource_local_to_scene = true
+lifetime_randomness = 0.39
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 1.0
@@ -15,25 +30,29 @@ emission_ring_cone_angle = 37.95
 angle_min = -45.0
 angle_max = 45.0
 direction = Vector3(0, 1, 0)
+spread = 180.0
 angular_velocity_min = -509.54
 angular_velocity_max = 720.0
 scale_min = 0.1
 scale_max = 0.25
+scale_curve = SubResource("CurveTexture_ns6u7")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.14
 
-[sub_resource type="QuadMesh" id="QuadMesh_noarx"]
-size = Vector2(0.5, 2)
+[sub_resource type="QuadMesh" id="QuadMesh_ns6u7"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+layers = 4
 material_override = SubResource("StandardMaterial3D_4xowi")
 transparency = 0.26
-amount = 10
-lifetime = 5.64
+amount = 12
+lifetime = 3.0
 explosiveness = 0.95
-randomness = 0.1
+randomness = 0.75
 visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
 transform_align = 1
-trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_a202f")
-draw_pass_1 = SubResource("QuadMesh_noarx")
+draw_pass_1 = SubResource("QuadMesh_ns6u7")
