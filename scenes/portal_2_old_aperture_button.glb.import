@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://djo7hojqwqimo"
-path="res://.godot/imported/portal_2_old_aperture_button.glb-650c2978c43bb8727d2fc52d7458d2c7.scn"
+path="res://.godot/imported/portal_2_old_aperture_button.glb-4b3fc9d39f7b89994f8c740c0d268bd7.scn"
 
 [deps]
 
-source_file="res://portal_2_old_aperture_button.glb"
-dest_files=["res://.godot/imported/portal_2_old_aperture_button.glb-650c2978c43bb8727d2fc52d7458d2c7.scn"]
+source_file="res://scenes/portal_2_old_aperture_button.glb"
+dest_files=["res://.godot/imported/portal_2_old_aperture_button.glb-4b3fc9d39f7b89994f8c740c0d268bd7.scn"]
 
 [params]
 

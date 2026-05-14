@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csuoww7sy2s5p"
-path.s3tc="res://.godot/imported/Sky_Day_BlueSky_Equirect.png-75a767c7c42d83bcbe1cd489704052bb.s3tc.ctex"
+uid="uid://3unyitqp4hfy"
+path.s3tc="res://.godot/imported/portal_2_old_aperture_button_0.png-31e3d8d56c5bbc2720942a9476451f12.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "3ad6029ccf5bd744e47a2dcfef3a11c7"
+}
 
 [deps]
 
-source_file="res://Sky_Day_BlueSky_Equirect.png"
-dest_files=["res://.godot/imported/Sky_Day_BlueSky_Equirect.png-75a767c7c42d83bcbe1cd489704052bb.s3tc.ctex"]
+source_file="res://scenes/portal_2_old_aperture_button_0.png"
+dest_files=["res://.godot/imported/portal_2_old_aperture_button_0.png-31e3d8d56c5bbc2720942a9476451f12.s3tc.ctex"]
 
 [params]
 

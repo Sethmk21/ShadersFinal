@@ -31,7 +31,7 @@ float noise(vec2 p) {
     );
 }
 
-// Two octaves of noise for more organic feel
+// Two octaves of noise
 float fbm(vec2 p) {
     return noise(p) * 0.6 + noise(p * 2.1 + vec2(5.2, 1.3)) * 0.4;
 }
@@ -39,7 +39,7 @@ float fbm(vec2 p) {
 void fragment() {
     vec2 uv = UV * 2.0 - 1.0;
 
-    // Angle around the ellipse — used to animate noise along the ring
+    // Angle around the ellipse
     float angle = atan(uv.y, uv.x);
     vec2 noise_uv = vec2(angle * noise_scale / 6.28318, TIME * noise_speed);
     float n = fbm(noise_uv) - 0.5; // Center around 0
@@ -63,13 +63,12 @@ void fragment() {
                      + (displaced_uv.y * displaced_uv.y) / ((ellipse_y * inner_edge) * (ellipse_y * inner_edge));
 
     if (inner_dist < 1.0) {
-        // Inside: render viewport
+
         vec4 albedo_tex = texture(texture_albedo, SCREEN_UV);
         ALBEDO = albedo_tex.rgb;
     }
 	else {
-        // Ring + glow zone
-        // Hard ring opacity (full color)
+
         float ring_opacity = smoothstep(1.0, 1.0 - 0.02, dist) * smoothstep(inner_edge - 0.01, inner_edge + 0.01, sqrt(inner_dist));
 
         // Outer glow fades to transparent
@@ -81,7 +80,7 @@ void fragment() {
         vec3 color = ring_color.rgb;
         float alpha = max(ring_opacity, glow_opacity * glow_intensity * 0.4);
 
-        // Add a subtle brightness pulse using the noise value
+
         float pulse = fbm(vec2(TIME * noise_speed * 0.5, 0.0)) * 0.3 + 0.85;
         color *= pulse;
 		if (alpha < 0.01) {
